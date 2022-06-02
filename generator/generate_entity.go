@@ -61,7 +61,7 @@ func writeFileEntity(entity schemas.Project) (string, error) {
 		}
 	}
 
-	_, err = file.WriteString("\n" + strings.Join(abstractName, "") + "Entity({" + " \n")
+	_, err = file.WriteString("\nconst " + strings.Join(abstractName, "") + "Entity({" + " \n")
 	if isError(err) {
 		return "", err
 	}

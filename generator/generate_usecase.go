@@ -145,7 +145,7 @@ func writeFileUseCase(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("\tParams();\n")
+	_, err = file.WriteString("\tconst Params();\n")
 	if isError(err) {
 		return "", err
 	}
