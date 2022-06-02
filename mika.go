@@ -22,6 +22,7 @@ func (d *doFunction) RunGenerator() {
 	router := gin.Default()
 	router.POST("/generate", func(c *gin.Context) {
 		var project schemas.Project
+
 		c.ShouldBindJSON(&project)
 
 		gen := generator.NewGeneratorHandler(project)
