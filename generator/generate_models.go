@@ -56,7 +56,7 @@ func writeFileModels(project schemas.Project) (string, error) {
 		return "", err
 	}
 
-	_, err = file.WriteString("\t\n" + strings.Join(abstractName, "") + "Model({" + " \n")
+	_, err = file.WriteString("\t\nconst " + strings.Join(abstractName, "") + "Model({" + " \n")
 	if isError(err) {
 		return "", err
 	}

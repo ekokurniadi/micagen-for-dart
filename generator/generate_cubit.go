@@ -83,6 +83,11 @@ func writeFileCubit(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
+	//Write some text line-by-line to file.
+	_, err = file.WriteString("import \"../../../../core/usecases/usecases.dart\";\n")
+	if isError(err) {
+		return "", err
+	}
 
 	_, err = file.WriteString("part \"" + realName + "_state.dart\";\n\n")
 	if isError(err) {
@@ -122,6 +127,16 @@ func writeFileCubit(project schemas.Project) (string, error) {
 
 	for _, method := range project.VoidMapping {
 		_, err = file.WriteString("\n\t" + "Future<void> " + method.VoidName + "() async{\n")
+		if isError(err) {
+			return "", err
+		}
+
+		_, err = file.WriteString("\tfinal result = await _" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "UseCase.call(NoParams());\n")
+		if isError(err) {
+			return "", err
+		}
+
+		_, err = file.WriteString("\tresult.fold((l)=>null,(r)=>null);\n")
 		if isError(err) {
 			return "", err
 		}
