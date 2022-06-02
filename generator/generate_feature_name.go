@@ -21,17 +21,10 @@ func writeFolder(featureName string) error {
 	realName := strings.Join(realFeatureName, "_")
 
 	path := filepath.Join("./", realName)
-	_, err := os.Stat(path)
 
-	if os.IsExist(err) {
-		fmt.Println("your directory is already exist but it's ok")
-		return err
-	}
-
-	err = os.Mkdir(path, 0755)
+	err := os.Mkdir(path, 0755)
 	if err != nil {
 		fmt.Println("your directory is already exist but it's ok")
-		return err
 	}
 
 	var childCoreFolder = []string{"error", "usecases"}
