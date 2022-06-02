@@ -1,0 +1,46 @@
+{
+    "config":{
+       "null_safety":true,
+       "use_dartz_package":true,
+       "use_dependency_injection":true,
+       "enable_unit_testing":true
+    },
+    "feature_name":"users",
+    "entity":{
+        "entity_name":"users",
+        "entity_field":[
+            {
+                "data_type":"int",
+                "field_name":"id"
+            },
+            {
+                "data_type":"String",
+                "field_name":"userName"
+            },
+            {
+                "data_type":"String",
+                "field_name":"password"
+            },
+             {
+                "data_type":"String",
+                "field_name":"token"
+            }
+        ]
+    },
+     "state_management_options": {
+        "name":"users",
+        "state_management": "cubit"
+    },
+    "state":[
+        {
+        "state_name":"UsersSuccess",
+            "params_or_models":[
+                {"type":"model",  "use_list":true,"name":"usersData"},
+                {"type":"String",  "use_list":false,"name":"message"}
+            ]
+        }
+    ],
+    "methods":[
+        {"method_name":"getUsers"}
+    ]
+}
