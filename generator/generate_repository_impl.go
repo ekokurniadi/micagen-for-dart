@@ -45,7 +45,7 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 	}
 
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import \"../../../core/error/failures.dart\";\n")
+	_, err = file.WriteString("import \"../../../../core/error/failures.dart\";\n")
 	if isError(err) {
 		return "", err
 	}
