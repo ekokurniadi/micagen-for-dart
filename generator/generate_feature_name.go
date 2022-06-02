@@ -41,23 +41,11 @@ func writeFolder(featureName string) error {
 	var presentationChildFolder = []string{"bloc", "pages", "widgets"}
 
 	core := filepath.Join("./", "core")
-	err = os.Mkdir(core, 0755)
-	if err != nil {
-		fmt.Println(err)
-		return err
-	}
+	os.Mkdir(core, 0755)
 
 	for x := 0; x < len(childCoreFolder); x++ {
 		pathCore := filepath.Join("./core/", childCoreFolder[x])
-		if os.IsExist(err) {
-			fmt.Println("your directory is already exist but it's ok")
-		}
-
-		err = os.Mkdir(pathCore, 0755)
-		if err != nil {
-			fmt.Println("your directory is already exist but it's ok")
-			return err
-		}
+		os.Mkdir(pathCore, 0755)
 	}
 
 	for a := 0; a < len(baseFolder); a++ {
