@@ -6,8 +6,8 @@ type generator struct {
 	project schemas.Project
 }
 
-func NewGeneratorHandler(project schemas.Project) *generator {
-	return &generator{project}
+func NewGeneratorHandler(project schemas.Project) generator {
+	return generator{project}
 }
 
 func (h *generator) GenerateFeature() {
