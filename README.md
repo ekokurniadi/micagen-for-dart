@@ -30,7 +30,9 @@ func main(){
 go get github.com/ekokurniadi/micagen-for-dart
 ```
 
-### on your terminal on lib directory 7. Modify main.go
+### on your terminal on lib directory
+
+### 7. Modify main.go
 
 ```go
 package main
@@ -51,7 +53,13 @@ go run main.go
 
 ### on terminal on lib directory
 
-### 9. Open your Postman or something as same 10. Create new request to endpoint http://localhost:8080/generate with POST Method 11. Copy template json and modify 12. Klik Send
+### 9. Open your Postman or something as same
+
+### 10. Create new request to endpoint http://localhost:8080/generate with POST Method
+
+### 11. Copy template json and modify
+
+### 12. Klik Send
 
 ### Template JSON
 
