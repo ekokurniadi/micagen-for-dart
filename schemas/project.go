@@ -1,11 +1,10 @@
 package schemas
 
 type Project struct {
-	OutputPath  string         `json:"output_path"`
+	OutputPath  string         `json:"output_path,omitempty"`
 	Config      Config         `json:"config"`
 	FeatureName string         `json:"feature_name"`
 	Entity      EntityConfig   `json:"entity"`
-	BlocOptions BlocOptions    `json:"state_management_options"`
-	State       []StateMapping `json:"state"`
-	VoidMapping []VoidMapping  `json:"methods"`
+	State       []StateMapping `json:"state,omitempty"`
+	UseCase     []UseCase      `json:"usecases"`
 }

@@ -1,12 +1,12 @@
 package schemas
 
 type StateMapping struct {
-	StateName      string              `json:"state_name"`
-	ParamsOrModels []ParamsOrModelsMap `json:"params_or_models"`
+	StateName string   `json:"state_name"`
+	Params    []Params `json:"params"`
 }
 
-type ParamsOrModelsMap struct {
-	Type    string `json:"type"`
-	UseList bool   `json:"use_list"`
+type Params struct {
+	Type    string `json:"data_type"`
+	UseList bool   `json:"declare_as_list"`
 	Name    string `json:"name"`
 }

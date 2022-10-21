@@ -3,7 +3,7 @@ package mika
 import (
 	"encoding/json"
 
-	"github.com/ekokurniadi/micagen-for-dart/generator"
+	"github.com/ekokurniadi/micagen-for-dart/generator_v2"
 	"github.com/ekokurniadi/micagen-for-dart/schemas"
 	"github.com/gin-gonic/gin"
 )
@@ -20,12 +20,13 @@ func Initialized() *doFunction {
 
 func (d *doFunction) RunGenerator() {
 	router := gin.Default()
-	router.POST("/generate", func(c *gin.Context) {
+
+	router.POST("/v2/generate", func(c *gin.Context) {
 		var project schemas.Project
 
 		c.ShouldBindJSON(&project)
 
-		gen := generator.NewGeneratorHandler(project)
+		gen := generator_v2.NewGeneratorHandlerV2(project)
 
 		gen.GenerateFeature()
 
@@ -36,7 +37,7 @@ func (d *doFunction) RunGenerator() {
 		}
 		c.Writer.Write([]byte("{\n"))
 		c.Writer.Write([]byte("\"status\":200,\n"))
-		c.Writer.Write([]byte("\"message\": \"Generate Berhasil, silahkan cek directory " + project.FeatureName + " pada project anda,\",\n"))
+		c.Writer.Write([]byte("\"message\": \"Generate Berhasil, silahkan cek directory " + project.OutputPath + project.FeatureName + " pada project anda,\",\n"))
 		c.Writer.Write([]byte("\t\"parameter\":" + string(p) + "\n"))
 		c.Writer.Write([]byte("}"))
 	})

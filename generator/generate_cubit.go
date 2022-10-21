@@ -125,27 +125,27 @@ func writeFileCubit(project schemas.Project) (string, error) {
 		return "", err
 	}
 
-	for _, method := range project.VoidMapping {
-		_, err = file.WriteString("\n\t" + "Future<void> " + method.VoidName + "() async{\n")
-		if isError(err) {
-			return "", err
-		}
+	// for _, method := range project.VoidMapping {
+	// 	_, err = file.WriteString("\n\t" + "Future<void> " + method.VoidName + "() async{\n")
+	// 	if isError(err) {
+	// 		return "", err
+	// 	}
 
-		_, err = file.WriteString("\tfinal result = await _" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "UseCase.call(NoParams());\n")
-		if isError(err) {
-			return "", err
-		}
+	// 	_, err = file.WriteString("\tfinal result = await _" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "UseCase.call(NoParams());\n")
+	// 	if isError(err) {
+	// 		return "", err
+	// 	}
 
-		_, err = file.WriteString("\tresult.fold((l)=>null,(r)=>null);\n")
-		if isError(err) {
-			return "", err
-		}
+	// 	_, err = file.WriteString("\tresult.fold((l)=>null,(r)=>null);\n")
+	// 	if isError(err) {
+	// 		return "", err
+	// 	}
 
-		_, err = file.WriteString("\t}\n")
-		if isError(err) {
-			return "", err
-		}
-	}
+	// 	_, err = file.WriteString("\t}\n")
+	// 	if isError(err) {
+	// 		return "", err
+	// 	}
+	// }
 
 	_, err = file.WriteString("}")
 	if isError(err) {
@@ -254,37 +254,37 @@ func writeFileCubitState(project schemas.Project) (string, error) {
 		for i := range model {
 			models = append(models, strings.Title(model[i]))
 		}
-		for y := range project.State[x].ParamsOrModels {
-			if project.State[x].ParamsOrModels[y].Type == "model" && project.State[x].ParamsOrModels[y].UseList {
-				_, err = file.WriteString("\tfinal" + " " + "List<" + strings.Join(models, "") + "Model" + ">" + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
-				if isError(err) {
-					return "", err
-				}
-			} else if project.State[x].ParamsOrModels[y].Type == "model" && !project.State[x].ParamsOrModels[y].UseList {
-				_, err = file.WriteString("\tfinal" + " " + strings.Join(models, "") + "Model" + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
-				if isError(err) {
-					return "", err
-				}
-			} else {
-				_, err = file.WriteString("\tfinal" + " " + project.State[x].ParamsOrModels[y].Type + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
-				if isError(err) {
-					return "", err
-				}
-			}
+		// for y := range project.State[x].ParamsOrModels {
+		// 	if project.State[x].ParamsOrModels[y].Type == "model" && project.State[x].ParamsOrModels[y].UseList {
+		// 		_, err = file.WriteString("\tfinal" + " " + "List<" + strings.Join(models, "") + "Model" + ">" + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
+		// 		if isError(err) {
+		// 			return "", err
+		// 		}
+		// 	} else if project.State[x].ParamsOrModels[y].Type == "model" && !project.State[x].ParamsOrModels[y].UseList {
+		// 		_, err = file.WriteString("\tfinal" + " " + strings.Join(models, "") + "Model" + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
+		// 		if isError(err) {
+		// 			return "", err
+		// 		}
+		// 	} else {
+		// 		_, err = file.WriteString("\tfinal" + " " + project.State[x].ParamsOrModels[y].Type + " " + project.State[x].ParamsOrModels[y].Name + ";\n")
+		// 		if isError(err) {
+		// 			return "", err
+		// 		}
+		// 	}
 
-		}
+		// }
 
 		_, err = file.WriteString("\nconst " + strings.Join(states, "") + "({\n")
 		if isError(err) {
 			return "", err
 		}
-		for xy := range project.State[x].ParamsOrModels {
-			_, err = file.WriteString("required this." + project.State[x].ParamsOrModels[xy].Name + ",\n")
-			if isError(err) {
-				return "", err
-			}
+		// for xy := range project.State[x].ParamsOrModels {
+		// 	_, err = file.WriteString("required this." + project.State[x].ParamsOrModels[xy].Name + ",\n")
+		// 	if isError(err) {
+		// 		return "", err
+		// 	}
 
-		}
+		// }
 		_, err = file.WriteString("});\n\n")
 		if isError(err) {
 			return "", err
@@ -298,12 +298,12 @@ func writeFileCubitState(project schemas.Project) (string, error) {
 		if isError(err) {
 			return "", err
 		}
-		for xyz := range project.State[x].ParamsOrModels {
-			_, err = file.WriteString("" + project.State[x].ParamsOrModels[xyz].Name + ",")
-			if isError(err) {
-				return "", err
-			}
-		}
+		// for xyz := range project.State[x].ParamsOrModels {
+		// 	_, err = file.WriteString("" + project.State[x].ParamsOrModels[xyz].Name + ",")
+		// 	if isError(err) {
+		// 		return "", err
+		// 	}
+		// }
 		_, err = file.WriteString("];")
 		if isError(err) {
 			return "", err
