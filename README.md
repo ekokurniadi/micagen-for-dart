@@ -1,4 +1,5 @@
 Micagen For Dart - Flutter Clean Architecture Generator
+
 ## How to Used ?
 
 ### 1. Open your existing or new project flutter
@@ -65,46 +66,43 @@ go run main.go
 ```json
 {
   "config": {
-    "null_safety": true,
-    "use_dartz_package": true,
-    "use_dependency_injection": true,
-    "enable_unit_testing": true
+    "use_freezed": true
   },
-  "feature_name": "users",
+  "feature_name": "ocr",
   "entity": {
-    "entity_name": "users",
+    "entity_name": "ocr",
     "entity_field": [
       {
-        "data_type": "int",
-        "field_name": "id"
+        "data_type": "String",
+        "field_name": "result"
       },
       {
         "data_type": "String",
-        "field_name": "userName"
-      },
-      {
-        "data_type": "String",
-        "field_name": "password"
-      },
-      {
-        "data_type": "String",
-        "field_name": "token"
+        "field_name": "version"
       }
     ]
   },
-  "state_management_options": {
-    "name": "users",
-    "state_management": "cubit"
-  },
-  "state": [
+  "usecases": [
     {
-      "state_name": "UsersSuccess",
-      "params_or_models": [
-        { "type": "model", "use_list": true, "name": "usersData" },
-        { "type": "String", "use_list": false, "name": "message" }
-      ]
+      "usecase_name": "InsertImage",
+      "parameter": "OcrModel",
+      "return_type": "bool"
+    },
+    {
+      "usecase_name": "UpdateImage",
+      "parameter": "OcrModel",
+      "return_type": "OcrEntity"
+    },
+    {
+      "usecase_name": "GetTextFromImage",
+      "parameter": "OcrModel",
+      "return_type": "OcrEntity"
+    },
+    {
+      "usecase_name": "DeleteImage",
+      "parameter": "int",
+      "return_type": "bool"
     }
-  ],
-  "methods": [{ "method_name": "getUsers" }]
+  ]
 }
 ```
