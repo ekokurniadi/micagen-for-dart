@@ -1,6 +1,5 @@
-# micagen-for-dart
-
-### How to Used ?
+Micagen For Dart - Flutter Clean Architecture Generator
+## How to Used ?
 
 ### 1. Open your existing or new project flutter
 
