@@ -32,7 +32,7 @@ func writeFolder(featureName string) error {
 	var dataChildFolder = []string{"datasources", "models", "repositories"}
 	var dataSourceChildFolder = []string{"local", "remote"}
 	var domainChildFolder = []string{"entities", "repositories", "usecases"}
-	var presentationChildFolder = []string{"blocs", "pages", "widgets"}
+	var presentationChildFolder = []string{"bloc", "pages", "widgets"}
 
 	core := filepath.Join("./", "core")
 	os.Mkdir(core, 0755)

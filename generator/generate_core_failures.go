@@ -28,7 +28,7 @@ func writeFileCoreFailures(project schemas.Project) (string, error) {
 	defer file.Close()
 
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import 'package:equatable/equatable.dart';\n\nabstract class Failures extends Equatable {\n\tString get errorMessage;\n\t@override\n\tList<Object> get props => [errorMessage];\n}\n\nclass ServerFailure extends Failures {\n\tfinal String errorMessage;\n\n\tServerFailure({required this.errorMessage});\n\n\t@override\n\tList<Object> get props => [errorMessage];\n}\n\nclass CacheFailure extends Failures {\n\tfinal String errorMessage;\n\n\tCacheFailure({required this.errorMessage});\n\n\t@override\n\tList<Object> get props => [errorMessage];\n\n}")
+	_, err = file.WriteString("import 'package:equatable/equatable.dart';\n\nabstract class Failures extends Equatable {\n\tString get errorMessage;\n\t@override\n\tList<Object> get props => [errorMessage];\n}\n\nclass ServerFailure extends Failures {\n\tfinal String errorMessage;\n\n\tServerFailure({required this.errorMessage});\n\n\t@override\n\tList<Object> get props => [errorMessage];\n}\n\nclass DatabaseFailure extends Failures {\n\tfinal String errorMessage;\n\n\tDatabaseFailure({required this.errorMessage});\n\n\t@override\n\tList<Object> get props => [errorMessage];\n\n}")
 
 	if isError(err) {
 		return "", err

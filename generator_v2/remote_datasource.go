@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/ekokurniadi/micagen-for-dart/schemas"
+	"github.com/fatih/camelcase"
 )
 
 func GenerateRemoteDataSource(project schemas.Project) {
@@ -43,11 +44,11 @@ func writeFileRemoteDataSource(project schemas.Project) (string, error) {
 	}
 
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import \"../../../../core/error/failures.dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/core/error/failures.dart\";\n")
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"../../data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -70,9 +71,24 @@ func writeFileRemoteDataSource(project schemas.Project) (string, error) {
 		models = append(models, strings.Title(model[i]))
 	}
 
-	_, err = file.WriteString("\t\tFuture<Either<Failures," + strings.Join(models, "") + "Model>> execute();\n")
-	if isError(err) {
-		return "", err
+	for i := 0; i < len(project.UseCase); i++ {
+		usecases := camelcase.Split(project.UseCase[i].MethodName)
+		var u []string
+		for i := range usecases {
+			if i == 0 {
+				u = append(u, strings.ToLower(usecases[i]))
+			} else {
+				u = append(u, strings.Title(usecases[i]))
+			}
+
+		}
+		usesCaseName := strings.Join(u, "")
+
+		_, err = file.WriteString("\tFuture<Either<Failures," + project.UseCase[i].ReturnType + ">> " + usesCaseName + "(" + project.UseCase[i].Parameter + " params" + ");\n")
+		if isError(err) {
+			return "", err
+		}
+
 	}
 
 	_, err = file.WriteString("}\n")

@@ -45,25 +45,25 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 	}
 
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import \"../../../../core/error/failures.dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/core/error/failures.dart\";\n")
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"../../domain/repositories/" + realName + "_repository" + ".dart\";\n")
-	if isError(err) {
-		return "", err
-	}
-
-	_, err = file.WriteString("import \"../../data/datasources/remote/" + realName + "_remote_datasource" + ".dart\";\n")
-	if isError(err) {
-		return "", err
-	}
-	_, err = file.WriteString("import \"../../data/datasources/local/" + realName + "_local_datasource" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 
-	_, err = file.WriteString("import \"../../data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/data/datasources/remote/" + realName + "_remote_datasource" + ".dart\";\n")
+	if isError(err) {
+		return "", err
+	}
+	_, err = file.WriteString("import \"" + project.OutputPath + "/data/datasources/local/" + realName + "_local_datasource" + ".dart\";\n")
+	if isError(err) {
+		return "", err
+	}
+
+	_, err = file.WriteString("import \"" + project.OutputPath + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -112,7 +112,7 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("}):" + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "LocalDataSource =" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "LocalDataSource,\n" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource =" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource;\n\n")
+	_, err = file.WriteString("}):" + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "LocalDataSource =" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "LocalDataSource,\n" + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource =" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource;\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -123,24 +123,36 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 		models = append(models, strings.Title(model[i]))
 	}
 
-	_, err = file.WriteString("\t@override\n")
-	if isError(err) {
-		return "", err
-	}
+	for i := 0; i < len(project.UseCase); i++ {
+		usecases := camelcase.Split(project.UseCase[i].MethodName)
+		var u []string
+		for i := range usecases {
+			if i == 0 {
+				u = append(u, strings.ToLower(usecases[i]))
+			} else {
+				u = append(u, strings.Title(usecases[i]))
+			}
 
-	_, err = file.WriteString("\tFuture<Either<Failures," + strings.Join(models, "") + "Model>> execute() async{\n")
-	if isError(err) {
-		return "", err
-	}
+		}
+		usesCaseName := strings.Join(u, "")
+		_, err = file.WriteString("\t@override\n")
+		if isError(err) {
+			return "", err
+		}
+		_, err = file.WriteString("\tFuture<Either<Failures," + project.UseCase[i].ReturnType + ">> " + usesCaseName + "(" + project.UseCase[i].Parameter + " params" + ") async{\n")
+		if isError(err) {
+			return "", err
+		}
 
-	_, err = file.WriteString("\t\treturn await " + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource.execute();\n")
-	if isError(err) {
-		return "", err
-	}
+		_, err = file.WriteString("\t\treturn await " + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "RemoteDataSource." + usesCaseName + "(params);\n")
+		if isError(err) {
+			return "", err
+		}
 
-	_, err = file.WriteString("\t}\n")
-	if isError(err) {
-		return "", err
+		_, err = file.WriteString("\t}\n")
+		if isError(err) {
+			return "", err
+		}
 	}
 
 	_, err = file.WriteString("}\n")

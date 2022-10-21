@@ -69,21 +69,21 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 	}
 
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import \"../../../../core/error/failures.dart\";\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/core/error/failures.dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 	//Write some text line-by-line to file.
-	_, err = file.WriteString("import \"../../../../core/usecases/usecases.dart\";\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/core/usecases/usecases.dart\";\n")
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"../../domain/repositories/" + realName + "_repository" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 
-	_, err = file.WriteString("import \"../../data/models/" + p.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/data/models/" + p.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -117,6 +117,17 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 
 	}
 
+	var s []string
+	for j := range usecases {
+		if j == 0 {
+			s = append(s, strings.ToLower(usecases[j]))
+		} else {
+			s = append(s, strings.Title(usecases[j]))
+		}
+
+	}
+	usesCaseMethodName := strings.Join(s, "")
+
 	_, err = file.WriteString("\tfinal " + strings.Join(abstractName, "") + "Repository " + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "Repository;\n\n")
 	if isError(err) {
 		return "", err
@@ -145,7 +156,7 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 		return "", err
 	}
 
-	_, err = file.WriteString("\t\treturn await " + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "Repository.execute();\n")
+	_, err = file.WriteString("\t\treturn await " + "_" + strings.Replace(strings.Join(datasources, ""), "_", "", -1) + "Repository." + usesCaseMethodName + "(params);\n")
 	if isError(err) {
 		return "", err
 	}

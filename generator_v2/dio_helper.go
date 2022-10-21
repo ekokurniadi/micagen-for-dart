@@ -8,15 +8,15 @@ import (
 	"path/filepath"
 )
 
-func GenerateBuildYaml() {
-	createFileBuildYaml()
+func GenerateDioHelper() {
+	createFileDioHelper()
 	// writeFileBuildYaml()
 }
 
-func createFileBuildYaml() (string, error) {
-	copiedFilepath, _ := filepath.Abs("./generator_v2/build.yaml")
+func createFileDioHelper() (string, error) {
+	copiedFilepath, _ := filepath.Abs("./generator_v2/dio_helper.txt")
 
-	filepath, err := filepath.Abs("./././build.yaml")
+	filepath, err := filepath.Abs("./core/helpers/dio_helper.dart")
 
 	if err != nil {
 		log.Fatal("error")
