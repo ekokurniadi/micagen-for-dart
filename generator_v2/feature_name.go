@@ -19,10 +19,15 @@ func writeFolder(featureName string) error {
 		realFeatureName = append(realFeatureName, strings.ToLower(splitText[a]))
 	}
 	realName := strings.Join(realFeatureName, "_")
+	root := filepath.Join("./", "features")
+	err := os.Mkdir(root, 0775)
 
-	path := filepath.Join("./", realName)
+	if err != nil {
+		fmt.Println("your directory is already exist but it's ok")
+	}
+	path := filepath.Join(root, "/", realName)
 
-	err := os.Mkdir(path, 0755)
+	err = os.Mkdir(path, 0755)
 	if err != nil {
 		fmt.Println("your directory is already exist but it's ok")
 	}

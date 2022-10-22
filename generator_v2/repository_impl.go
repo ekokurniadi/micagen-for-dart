@@ -26,7 +26,7 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/data/repositories/" + realName + "_repository_impl" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/data/repositories/" + realName + "_repository_impl" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err
@@ -49,21 +49,21 @@ func writeFileRepositoryImpl(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"" + project.OutputPath + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 
-	_, err = file.WriteString("import \"" + project.OutputPath + "/data/datasources/remote/" + realName + "_remote_datasource" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/data/datasources/remote/" + realName + "_remote_datasource" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"" + project.OutputPath + "/data/datasources/local/" + realName + "_local_datasource" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/data/datasources/local/" + realName + "_local_datasource" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 
-	_, err = file.WriteString("import \"" + project.OutputPath + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -173,7 +173,7 @@ func createFileRepositoryImpl(project schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/data/repositories/" + realName + "_repository_impl" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/data/repositories/" + realName + "_repository_impl" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err

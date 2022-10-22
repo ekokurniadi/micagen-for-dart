@@ -20,7 +20,10 @@ func NewGeneratorHandlerV2(project schemas.Project) generatorv2 {
 }
 
 func (h *generatorv2) GenerateFeature() {
-	fileName, _ := filepath.Abs("./././pubspec.yaml")
+	current, _ := os.Getwd()
+	fmt.Println(current)
+
+	fileName, _ := filepath.Abs("../pubspec.yaml")
 	f, err := os.Open(fileName)
 	if err != nil {
 		fmt.Printf("error opening file: %v\n", err)

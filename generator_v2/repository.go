@@ -25,7 +25,7 @@ func writeFileRepository(project schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/domain/repositories/" + realName + "_repository" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/domain/repositories/" + realName + "_repository" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err
@@ -48,7 +48,7 @@ func writeFileRepository(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"" + project.OutputPath + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -109,7 +109,7 @@ func createFileRepository(project schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/domain/repositories/" + realName + "_repository" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/domain/repositories/" + realName + "_repository" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err

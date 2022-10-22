@@ -24,7 +24,7 @@ func writeFileModels(entity schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/data/models/" + strings.ToLower(entity.Entity.EntityName) + "_model.codegen" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/data/models/" + strings.ToLower(entity.Entity.EntityName) + "_model.codegen" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err
@@ -183,7 +183,7 @@ func createFileModels(entity schemas.Project) (string, error) {
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/data/models/" + strings.ToLower(entity.Entity.EntityName) + "_model.codegen" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/data/models/" + strings.ToLower(entity.Entity.EntityName) + "_model.codegen" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err

@@ -45,7 +45,7 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/domain/usecases/" + usesCaseNameFile + "_usecase" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/domain/usecases/" + usesCaseNameFile + "_usecase" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err
@@ -78,12 +78,12 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("import \"" + p.OutputPath + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/features/" + realName + "/domain/repositories/" + realName + "_repository" + ".dart\";\n")
 	if isError(err) {
 		return "", err
 	}
 
-	_, err = file.WriteString("import \"" + p.OutputPath + "/data/models/" + p.Entity.EntityName + "_model.codegen.dart\";\n\n")
+	_, err = file.WriteString("import \"" + p.OutputPath + "/features/" + realName + "/data/models/" + p.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err
 	}
@@ -192,7 +192,7 @@ func createNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, e
 	}
 	realName := strings.Join(realFeatureName, "_")
 
-	filepath, err := filepath.Abs("./" + realName + "/domain/usecases/" + usesCaseNameFile + "_usecase" + ".dart")
+	filepath, err := filepath.Abs("./features/" + realName + "/domain/usecases/" + usesCaseNameFile + "_usecase" + ".dart")
 	if err != nil {
 		log.Fatal("error")
 		return filepath, err
