@@ -61,6 +61,15 @@ go run main.go
 
 ### 12. Klik Send
 
+### 13. You must add some package on your pubspec.yaml
+ - dartz
+ - equatable
+ - freezed
+ - freezed_annotation
+ - json_serializable
+ - dio
+ - build_runner
+
 ### Template JSON
 
 ```json
