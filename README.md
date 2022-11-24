@@ -55,11 +55,22 @@ go run main.go
 
 ### 9. Open your Postman or something as same
 
-### 10. Create new request to endpoint http://localhost:8080/generate with POST Method
+### 10. Create new request to endpoint http://localhost:8080/v2/generate with POST Method
 
 ### 11. Copy template json and modify
 
 ### 12. Klik Send
+
+### 13. You must add some package on your pubspec.yaml
+```yaml
+  dartz: ^<version>
+  equatable: ^<version>
+  freezed: ^<version>
+  freezed_annotation: ^<version>
+  json_serializable: ^<version>
+  dio: ^<version>
+  build_runner: ^<version>
+```
 
 ### Template JSON
 
