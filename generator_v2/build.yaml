@@ -19,3 +19,6 @@ targets:
         generate_for:
             - lib/**/bloc/**.dart
             - lib/**.codegen.dart
+      injectable_generator:injectable_config_builder:
+        generate_for:
+          - lib/injector.dart
