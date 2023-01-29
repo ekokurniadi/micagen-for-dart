@@ -1,5 +1,8 @@
 Micagen For Dart - Flutter Clean Architecture Generator
 
+## Example Project 
+https://github.com/ekokurniadi/flutter_mahasiswa
+
 ## How to Used ?
 
 ### 1. Open your existing or new project flutter
