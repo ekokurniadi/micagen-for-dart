@@ -6,25 +6,16 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/ekokurniadi/micagen-for-dart/schemas"
 )
 
-func GenerateDioHelper(project schemas.Project) {
-	createFileDioHelper(project)
-	// writeFileBuildYaml()
+func GenerateInjectorConfig() {
+	createFileInjectorConfig()
 }
 
-func createFileDioHelper(project schemas.Project) (string, error) {
+func createFileInjectorConfig() (string, error) {
 
-	url := ""
-	if project.Config.UseInjectable {
-		url = "https://raw.githubusercontent.com/ekokurniadi/micagen-for-dart/main/generator_v2/dio_helper_injectable.txt"
-	} else {
-		url = "https://raw.githubusercontent.com/ekokurniadi/micagen-for-dart/main/generator_v2/dio_helper.txt"
-	}
-
-	filenames := "./core/helpers/dio_helper.dart"
+	filenames := "injector.dart"
+	url := "https://raw.githubusercontent.com/ekokurniadi/micagen-for-dart/main/generator_v2/injector.txt"
 
 	response, err := http.Get(url)
 	if err != nil {

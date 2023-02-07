@@ -63,6 +63,13 @@ func writeFileRemoteDataSourceImpl(project schemas.Project) (string, error) {
 		abstractName = append(abstractName, strings.Title(abstract[i]))
 	}
 
+	if project.Config.UseInjectable {
+		_, err = file.WriteString("@LazySingleton(as:" + strings.Join(abstractName, "") + "RemoteDataSource" + ") " + "\n")
+		if isError(err) {
+			return "", err
+		}
+	}
+
 	//Write some text line-by-line to file.
 	_, err = file.WriteString("class " + strings.Join(abstractName, "") + "RemoteDataSourceImpl implements " + strings.Join(abstractName, "") + "RemoteDataSource {\n")
 	if isError(err) {

@@ -32,7 +32,7 @@ func writeFolder(featureName string) error {
 		fmt.Println("your directory is already exist but it's ok")
 	}
 
-	var childCoreFolder = []string{"error", "usecases", "helpers", "constant", "extensions"}
+	var childCoreFolder = []string{"error", "usecases", "helpers", "constant", "extensions", "module"}
 	var baseFolder = []string{"data", "domain", "presentations"}
 	var dataChildFolder = []string{"datasources", "models", "repositories"}
 	var dataSourceChildFolder = []string{"local", "remote"}

@@ -63,6 +63,12 @@ func writeFileDataSourceImpl(project schemas.Project) (string, error) {
 		abstractName = append(abstractName, strings.Title(abstract[i]))
 	}
 
+	if project.Config.UseInjectable {
+		_, err = file.WriteString("@LazySingleton(as:" + strings.Join(abstractName, "") + "LocalDataSource" + ") " + "\n")
+		if isError(err) {
+			return "", err
+		}
+	}
 	//Write some text line-by-line to file.
 	_, err = file.WriteString("class " + strings.Join(abstractName, "") + "LocalDataSourceImpl implements " + strings.Join(abstractName, "") + "LocalDataSource {\n")
 	if isError(err) {

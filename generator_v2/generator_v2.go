@@ -44,21 +44,41 @@ func (h *generatorv2) GenerateFeature() {
 	h.project.OutputPath = "package:" + packageName
 
 	GenerateFeatureName(h.project.FeatureName)
+
 	GenerateEntity(h.project)
+
 	generator.GenerateCoreFailures(h.project)
 	generator.GenerateCoreUsecases(h.project)
 
 	if h.project.Config.UseFreezed {
 		GenerateBuildYaml()
 	}
-	GenerateModels(h.project)
-	GenerateRepository(h.project)
-	GenerateRepositoryImpl(h.project)
-	GenerateLocalDataSource(h.project)
-	GenerateLocalDataSourceImpl(h.project)
-	GenerateRemoteDataSource(h.project)
-	GenerateRemoteDataSourceImpl(h.project)
-	GenerateUseCase(h.project)
-	GenerateDioHelper()
+	if h.project.Config.UseInjectable {
+		GenerateInjectorConfig()
+	}
+	if h.project.GeneratorOption.GenerateModel {
+		GenerateModels(h.project)
+	}
+
+	if h.project.GeneratorOption.GenerateRepository {
+		GenerateRepository(h.project)
+		GenerateRepositoryImpl(h.project)
+	}
+
+	if h.project.GeneratorOption.GenerateLocalDataSource {
+		GenerateLocalDataSource(h.project)
+		GenerateLocalDataSourceImpl(h.project)
+	}
+
+	if h.project.GeneratorOption.GenerateRemoteDataSource {
+		GenerateRemoteDataSource(h.project)
+		GenerateRemoteDataSourceImpl(h.project)
+	}
+
+	if h.project.GeneratorOption.GenerateUseCase {
+		GenerateUseCase(h.project)
+	}
+
+	GenerateDioHelper(h.project)
 
 }

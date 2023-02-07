@@ -100,6 +100,12 @@ func writeNewFileUseCase(usecase schemas.UseCase, p schemas.Project) (string, er
 		models = append(models, strings.Title(model[i]))
 	}
 
+	if p.Config.UseInjectable {
+		_, err = file.WriteString("@injectable" + "\n")
+		if isError(err) {
+			return "", err
+		}
+	}
 	//Write some text line-by-line to file.
 	_, err = file.WriteString("class " + usesCaseName + "UseCase implements UseCase<" + usecase.ReturnType + "," + usecase.Parameter + ">{\n")
 	if isError(err) {
