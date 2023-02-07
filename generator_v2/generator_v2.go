@@ -77,6 +77,10 @@ func (h *generatorv2) GenerateFeature() {
 
 	if h.project.GeneratorOption.GenerateUseCase {
 		GenerateUseCase(h.project)
+
+	}
+	if h.project.GeneratorOption.GenerateModule {
+		GenerateModule(h.project)
 	}
 
 	GenerateDioHelper(h.project)
