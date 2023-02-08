@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'core/helpers/dio_helper.dart';
+import '../helpers/dio_helper.dart';
 
 @module
 abstract class NetworkModule {

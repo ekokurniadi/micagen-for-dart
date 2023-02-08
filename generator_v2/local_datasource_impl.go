@@ -43,6 +43,13 @@ func writeFileDataSourceImpl(project schemas.Project) (string, error) {
 		return "", err
 	}
 
+	if project.Config.UseInjectable {
+		_, err = file.WriteString("import \"package:injectable/injectable.dart\";\n")
+		if isError(err) {
+			return "", err
+		}
+	}
+
 	//Write some text line-by-line to file.
 	_, err = file.WriteString("import \"" + project.OutputPath + "/core/error/failures.dart\";\n")
 	if isError(err) {
