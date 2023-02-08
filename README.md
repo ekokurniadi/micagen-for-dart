@@ -73,50 +73,72 @@ go run main.go
   json_serializable: ^<version>
   dio: ^<version>
   build_runner: ^<version>
+  get_it: ^<version>
+  injectable: ^<version>
+  injectable_generator: ^<version>
+  shared_preferences: ^<version>
 ```
 
 ### Template JSON
 
 ```json
 {
-  "config": {
-    "use_freezed": true
-  },
-  "feature_name": "ocr",
-  "entity": {
-    "entity_name": "ocr",
-    "entity_field": [
-      {
-        "data_type": "String",
-        "field_name": "result"
-      },
-      {
-        "data_type": "String",
-        "field_name": "version"
-      }
-    ]
-  },
-  "usecases": [
-    {
-      "usecase_name": "InsertImage",
-      "parameter": "OcrModel",
-      "return_type": "bool"
+    "config": {
+        "use_freezed": true,
+        "use_injectable": true
     },
-    {
-      "usecase_name": "UpdateImage",
-      "parameter": "OcrModel",
-      "return_type": "OcrEntity"
+    "feature_name": "ayat",
+    "entity": {
+        "entity_name": "ayat",
+        "entity_field": [
+            {
+                "data_type": "int",
+                "field_name": "nomor"
+            },
+            {
+                "data_type": "String",
+                "field_name": "nama"
+            },
+            {
+                "data_type": "String",
+                "field_name": "namaLatin"
+            },
+            {
+                "data_type": "int",
+                "field_name": "jumlahAyat"
+            },
+            {
+                "data_type": "String",
+                "field_name": "tempatTurun"
+            },
+            {
+                "data_type": "String",
+                "field_name": "arti"
+            },
+            {
+                "data_type": "String",
+                "field_name": "deskripsi"
+            },
+            {
+                "data_type": "String",
+                "field_name": "audio"
+            }
+        ]
     },
-    {
-      "usecase_name": "GetTextFromImage",
-      "parameter": "OcrModel",
-      "return_type": "OcrEntity"
-    },
-    {
-      "usecase_name": "DeleteImage",
-      "parameter": "int",
-      "return_type": "bool"
+    "usecases": [
+        {
+            "usecase_name": "GetAllSurah",
+            "parameter": "NoParams",
+            "return_type": "List<AyatModel>"
+        }
+    ],
+    "generator_options": {
+        "generate_model": true,
+        "generate_usecase": true,
+        "generate_local_data_source": true,
+        "generate_remote_data_source": true,
+        "generate_repository": true,
+        "generate_module": true
     }
-  ]
 }
 ```
