@@ -83,6 +83,21 @@ func (h *generatorv2) GenerateFeature() {
 		GenerateModule(h.project)
 	}
 
+	if h.project.GeneratorOption.GenerateBloc {
+		generator.GenerateBloc(h.project)
+	}
+
+	if h.project.GeneratorOption.GenerateAll {
+		GenerateModels(h.project)
+		GenerateRepository(h.project)
+		GenerateRepositoryImpl(h.project)
+		GenerateLocalDataSource(h.project)
+		GenerateLocalDataSourceImpl(h.project)
+		GenerateUseCase(h.project)
+		GenerateModule(h.project)
+		generator.GenerateBloc(h.project)
+	}
+
 	GenerateDioHelper(h.project)
 
 }

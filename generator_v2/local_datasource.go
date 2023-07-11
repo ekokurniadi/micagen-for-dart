@@ -48,6 +48,13 @@ func writeFileDataSource(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
+
+	//Write some text line-by-line to file.
+	_, err = file.WriteString("import \"" + project.OutputPath + "/core/usecases/usecase.dart\";\n")
+	if isError(err) {
+		return "", err
+	}
+
 	_, err = file.WriteString("import \"" + project.OutputPath + "/features/" + realName + "/data/models/" + project.Entity.EntityName + "_model.codegen.dart\";\n\n")
 	if isError(err) {
 		return "", err

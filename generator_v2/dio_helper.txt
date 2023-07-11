@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class DioHelper {
@@ -20,15 +21,15 @@ class DioHelper {
     dio!.interceptors.add(
       InterceptorsWrapper(
         onResponse: (response, responseInterceptorHandler) {
-          print('${response.statusCode} - ${response.data.toString()}\n');
+          log('${response.statusCode} - ${response.data.toString()}\n');
           return responseInterceptorHandler.next(response);
         },
         onRequest: (request, requestInterceptorHandler) {
-          print('${request.method} - ${request.path} - ${request.data}');
+          log('${request.method} - ${request.path} - ${request.data}');
           return requestInterceptorHandler.next(request);
         },
         onError: (DioError error, errorInterceptor) {
-          print(error.message);
+          log(error.message);
           return errorInterceptor.next(error);
         },
       ),
@@ -37,6 +38,6 @@ class DioHelper {
 
   static setDioHeader(String? token) {
     dio!.options.headers = {HttpHeaders.authorizationHeader: 'Bearer $token'};
-    print('token user: $token');
+    log('token user: $token');
   }
 }

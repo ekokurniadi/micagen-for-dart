@@ -33,6 +33,11 @@ func writeFileCoreUsecases(project schemas.Project) (string, error) {
 		return "", err
 	}
 	//Write some text line-by-line to file.
+	_, err = file.WriteString("import \"package:dart:async\";\n")
+	if isError(err) {
+		return "", err
+	}
+	//Write some text line-by-line to file.
 	_, err = file.WriteString("import \"package:equatable/equatable.dart\";\n")
 	if isError(err) {
 		return "", err
@@ -48,7 +53,7 @@ func writeFileCoreUsecases(project schemas.Project) (string, error) {
 	if isError(err) {
 		return "", err
 	}
-	_, err = file.WriteString("\tFuture<Either<Failures,Type>> call(Params params);\n")
+	_, err = file.WriteString("\tFutureOr<Either<Failures,Type>> call(Params params);\n")
 	if isError(err) {
 		return "", err
 	}

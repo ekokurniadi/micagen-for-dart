@@ -8,4 +8,6 @@ type GeneratorOption struct {
 	GenerateRemoteDataSource bool `json:"generate_remote_data_source,omitempty"`
 	GenerateRepository       bool `json:"generate_repository,omitempty"`
 	GenerateModule           bool `json:"generate_module,omitempty"`
+	GenerateBloc             bool `json:"generate_bloc,omitempty"`
+	GenerateAll              bool `json:"generate_all,omitempty"`
 }
